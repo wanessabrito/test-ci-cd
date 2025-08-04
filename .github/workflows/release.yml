@@ -1,0 +1,29 @@
+name: Release GitHub
+
+on:
+  workflow_run:
+    workflows: ["Build Java"]
+    types:
+      - completed
+
+jobs:
+  release:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artefato do build
+        uses: actions/download-artifact@v3
+        with:
+          name: app-jar
+          path: demo/target/
+
+      - name: Criar Release no GitHub
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.run_number }}
+          name: Release ${{ github.run_number }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
