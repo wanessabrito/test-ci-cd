@@ -87,7 +87,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build imagem Docker
-        run: docker build -t nessa742/test-ci-cd:${{ github.sha }} ./demo
+        run: docker build -t nessa742/test-ci-cd:${{ github.sha }} .
       
       - name: Push imagem Docker
         run: docker push nessa742/test-ci-cd:${{ github.sha }}
