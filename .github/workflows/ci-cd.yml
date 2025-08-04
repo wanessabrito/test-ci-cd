@@ -80,6 +80,12 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v3
 
+      - name: Baixar artefato .jar
+        uses: actions/download-artifact@v4
+        with:
+         name: app-jar
+         path: demo/target/
+
       - name: Login no Docker Hub
         uses: docker/login-action@v2
         with:
