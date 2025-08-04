@@ -19,7 +19,11 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '21'
-
+          
+      - name: Dar permissão de execução ao mvnw
+        run: chmod +x ./mvnw
+        working-directory: demo
+        
       - name: Executar testes JUnit
         run: ./mvnw test
         working-directory: demo
